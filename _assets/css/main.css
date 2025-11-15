@@ -1,0 +1,244 @@
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #222;
+  background: #f5f6f8;
+}
+
+body {
+  line-height: 1.6;
+}
+
+/* Layout helpers */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3.5rem;
+}
+
+/* Header and nav */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 0.5rem;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #2a7b4e, #84b326);
+  color: #fff;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.brand-tagline {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: #444;
+}
+
+.nav-link:hover {
+  border-color: #cfd3dc;
+  background: #ffffff;
+}
+
+.nav-link-active {
+  border-color: #84b326;
+  background: #ffffff;
+  color: #1e5b3a;
+}
+
+/* Hero */
+.hero {
+  margin-top: 2.5rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  color: #5c6470;
+  margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  margin: 0 0 1rem;
+}
+
+.hero-text {
+  max-width: 650px;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.button.primary {
+  background: #84b326;
+  border-color: #84b326;
+  color: #fff;
+}
+
+.button.primary:hover {
+  background: #779e22;
+  border-color: #779e22;
+}
+
+.button.secondary {
+  background: transparent;
+  border-color: #cfd3dc;
+  color: #333;
+}
+
+.button.secondary:hover {
+  background: #ffffff;
+}
+
+/* Pillars */
+.pillars {
+  margin-top: 3rem;
+}
+
+.pillars h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.pillar {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.25rem 1.25rem 1.35rem;
+  border: 1px solid #e0e3eb;
+}
+
+.pillar h3 {
+  font-size: 1.05rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* Highlight section */
+.highlight {
+  margin-top: 3rem;
+}
+
+.highlight-content {
+  background: #ffffff;
+  border-radius: 1.2rem;
+  padding: 1.75rem 1.5rem 2rem;
+  border: 1px solid #d5e6c3;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.03);
+}
+
+.highlight h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.highlight-note {
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.process-list {
+  padding-left: 1.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.process-list li {
+  margin-bottom: 0.75rem;
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid #dde0e7;
+  margin-top: 2.5rem;
+  padding: 1rem 1.5rem 1.5rem;
+  font-size: 0.8rem;
+  color: #777;
+  text-align: center;
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  main {
+    padding-inline: 1rem;
+  }
+}
