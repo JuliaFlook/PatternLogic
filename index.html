@@ -1,7 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PatternLogic - Instructional Design</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="I specialize in turning messy content into clear, scannable learning experiences.">
+
+  <link rel="stylesheet" href="./_assets/css/main.css">
+</head>
 <body>
-<h1>PatternLogic</h1>
-<p>Site coming soon.</p>
+  <header class="site-header">
+    <div class="logo-area">
+      <div class="logo-mark">PL</div>
+      <div class="logo-text">
+        <span class="brand-name">PatternLogic</span>
+        <span class="brand-tagline">Carving clarity from complexity</span>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link nav-link-active">Home</a>
+      <a href="approach.html" class="nav-link">My Approach</a>
+      <a href="portfolio.html" class="nav-link">Before / After</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Instructional Design • Systems Thinking • Cognitive Load</p>
+      <h1>I turn messy content and confusing LMS shells into clear, scannable learning flows.</h1>
+      <p class="hero-text">
+        I specialize in cleaning up what already exists:
+        simplifying complex courses, aligning content with outcomes,
+        and building flow that makes it obvious what learners do next.
+      </p>
+      <div class="hero-actions">
+        <a href="approach.html" class="button primary">See how I think</a>
+        <a href="portfolio.html" class="button secondary">View before / after examples</a>
+      </div>
+    </section>
+
+    <section class="pillars">
+      <h2>How I create clarity</h2>
+      <div class="pillar-grid">
+        <article class="pillar">
+          <h3>Cognitive Load Strategist</h3>
+          <p>
+            I strip away visual and cognitive noise so key ideas and actions stand out.
+            The goal is less overwhelm and more confident progress for learners.
+          </p>
+        </article>
+
+        <article class="pillar">
+          <h3>Systems Thinker</h3>
+          <p>
+            I see patterns across courses, templates, and tools, then design structures that scale.
+            One clear model course can quietly upgrade the whole program.
+          </p>
+        </article>
+
+        <article class="pillar">
+          <h3>Execution Partner</h3>
+          <p>
+            I do the unglamorous work of fixing existing shells, reordering content,
+            and building quick reference guides that instructors actually use.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="highlight">
+      <div class="highlight-content">
+        <h2>From faculty handouts to flow-optimized learning</h2>
+        <p>
+          A typical starting point is a dense slide deck or a long Word document.
+          I rework it into a streamlined overview plus a clear sequence of learning tasks,
+          with just enough guidance and interaction to move learners forward.
+        </p>
+        <p class="highlight-note">
+          Employers: if you have one course that feels messy or hard to navigate,
+          that is the perfect pilot for PatternLogic.
+        </p>
+        <a href="portfolio.html" class="button primary">See a before / after walk-through</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> PatternLogic • Instructional Design and Learning Systems</p>
+  </footer>
+
+  <script>
+    // Simple year updater to keep the footer current
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
