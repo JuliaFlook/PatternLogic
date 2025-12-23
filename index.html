@@ -1,7 +1,855 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PatternLogic — Clarity from Complexity</title>
+
+  <style>
+    :root{
+      --brick:#9f3611;
+      --orange:#fa7d17;
+      --grey:#767171;
+      --teal:#1a646b;
+      --brightteal:#2b7f88;
+      --mutedteal:#A3BCC5;
+      --lightteal:#d2e8e4;
+      --softteal:#e7f1f3;
+      --cream:#fffdf8;
+      --wht:#ffffff;
+      --snpgrey:#f7f7f7;
+      --textmain:#2c2c2c;
+
+      --contentMax: 1120px;
+      --pagePad: clamp(16px, 4vw, 24px);
+      --grdntgrey: linear-gradient(to bottom, #f7f5ed, #f7f7f7);
+    }
+
+    *{ box-sizing:border-box; }
+
+    html, body{
+      margin:0;
+      padding:0;
+      background: var(--wht);
+      color: var(--textmain);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; }
+
+    .container{
+      max-width: var(--contentMax);
+      margin: 0 auto;
+      padding-inline: var(--pagePad);
+    }
+
+    .top-strip{
+      height: 20px;
+      background: var(--brick);
+    }
+
+    /* =========================
+       HEADER
+       ========================= */
+    header{
+      background: var(--snpgrey);
+      border-bottom: 1px solid #f0e5d8;
+    }
+
+    .header-wrap{
+      max-width: var(--contentMax);
+      margin: 0 auto;
+      padding-inline: var(--pagePad);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      gap: 20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      min-width: 0;
+    }
+
+    .brand-logo{
+      width: min(400px, 92vw);
+      max-width: 400px;
+    }
+
+    nav{
+      display:flex;
+      justify-content:flex-end;
+      min-width: 0;
+    }
+
+    nav ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap: 22px;
+      row-gap: 10px;
+      font-size: 0.95rem;
+      color: var(--grey);
+    }
+
+    nav a:hover{
+      color: var(--brick);
+    }
+
+    nav a{ white-space:nowrap; }
+
+    @media (max-width: 640px){
+      .header-wrap{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .brand{
+        width: 100%;
+      }
+
+      nav{
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      nav ul{
+        justify-content: flex-start;
+        gap: 14px;
+      }
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+    .hero{
+      background: var(--wht);
+      border-bottom: 1px solid var(--lightteal);
+      padding: 56px 0 64px;
+    }
+
+    .hero-inner{
+      display:grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-title{
+      margin:0 0 18px;
+      font-size: clamp(2.2rem, 3.2vw + 1.1rem, 3.4rem);
+      line-height: 1.1;
+      color: var(--brick);
+    }
+
+    .hero-subtitle{
+      margin:0 0 26px;
+      max-width: 34rem;
+      font-size: 1.05rem;
+      color: #514338;
+    }
+
+    .btn-primary{
+      display:inline-block;
+      padding: 12px 28px;
+      border-radius: 999px;
+      border: none;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.98rem;
+      cursor:pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+    }
+
+    .btn-primary:hover{
+      background:#e27113;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.16);
+    }
+
+    .hero-geo{
+      justify-self: end;
+      display:grid;
+      gap: clamp(8px, 2vw, 16px);
+      grid-template-columns: repeat(3, clamp(28px, 7vw, 80px));
+      grid-template-rows: repeat(4, clamp(28px, 7vw, 80px));
+      width: max-content;
+    }
+
+    .geo-shape{ background: var(--mutedteal); }
+    .geo-circle{ border-radius: 50%; }
+    .geo-half{ border-radius: 80px 80px 0 0; }
+    .geo-quarter{ border-radius: 80px 0 0 0; }
+
+    @media (max-width: 768px){
+      .hero-geo{ 
+        grid-template-columns: repeat(3, clamp(22px, 5vw, 45px));
+        grid-template-rows: repeat(4, clamp(22px, 5vw, 45px));
+        gap: clamp(6px, 1.5vw, 10px);
+      }
+    }
+
+    /* =========================
+       WHY
+       ========================= */
+    .why{
+      background: var(--softteal);
+      padding: 50px 0 56px;
+    }
+
+    .section-title{
+      margin:0 0 24px;
+      font-size: 1.6rem;
+      color: var(--teal);
+    }
+
+    .why-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .why-card{
+      background:#fff;
+      border-radius: 14px;
+      padding: 22px 20px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .why-icon{
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      border: 2px solid var(--teal);
+      position:relative;
+    }
+
+    .why-icon::after{
+      content:"";
+      position:absolute;
+      width:10px;
+      height:10px;
+      background: var(--orange);
+      border-radius:50%;
+      right:-4px;
+      bottom:-4px;
+    }
+.why-icon{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px 18px; /* keeps it visually similar inside the 32px circle */
+}
+
+.why-icon.pm{ background-image: url("_assets/img/ic_patternmapping.png"); }
+.why-icon.sd{ background-image: url("_assets/img/ic_systemdesign.png"); }
+.why-icon.ux{ background-image: url("_assets/img/ic_uxclarity.png"); }
+
+
+    .why-title{ margin:0; font-weight:600; font-size:1.05rem; color: var(--teal); }
+    .why-body{ margin:0; font-size:0.92rem; color:#4a4a4a; }
+
+.why-role{
+  margin-top: auto;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--grey);
+  opacity: 0.85;
+  text-align: center;
+}
+
+
+
+
+    @media (max-width: 720px){
+      .why-grid{ grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* =========================
+       HOW + PORTFOLIO
+       ========================= */
+    .how-portfolio{
+      background: var(--cream);
+      padding: 56px 0;
+    }
+
+    .hp-grid{
+      display:grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+      gap: 40px;
+      align-items:flex-start;
+    }
+
+    .hp-block-title{
+      margin:0 0 14px;
+      font-size:1.3rem;
+      color: var(--brick);
+    }
+
+    .hp-list{ list-style:none; padding:0; margin:0 0 26px; }
+    .hp-list li{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:8px;
+      font-size:0.96rem;
+    }
+
+    .hp-dot{ width:8px; height:8px; border-radius:50%; background: var(--brightteal); }
+    .hp-dot.orange{ background: var(--orange); }
+
+    .hp-flow{ display:flex; flex-direction:column; gap: 15px; max-width: 220px; }
+    .hp-step{
+      background: var(--softteal);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      color:#000;
+      position:relative;
+    }
+
+    .hp-step::after{
+      content:"↓";
+      position:absolute;
+      left:50%;
+      bottom:-16px;
+      transform: translateX(-50%);
+      font-size:1.5rem;
+      color: var(--mutedteal);
+      line-height:1;
+    }
+    .hp-step:last-child::after{ content:""; }
+
+    .portfolio-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .portfolio-card{
+      background:#f4f1ec;
+      border-radius:10px;
+      padding: 14px 14px 18px;
+      border-top: 4px solid var(--teal);
+      font-size: 0.9rem;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .portfolio-card-title{ font-weight:600; color: var(--teal); }
+    .portfolio-card-line{ height:2px; background:#d0c7bb; border-radius:999px; width:70%; }
+    .portfolio-card-line.short{ width:40%; }
+
+.portfolio-note{
+  margin: 0 0 18px;
+  font-size: 0.9rem;
+  color: #6f6f6f;
+}
+
+
+    .btn-secondary{
+      display:inline-block;
+      padding: 10px 22px;
+      border-radius: 999px;
+      background: var(--orange);
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      font-size:0.95rem;
+    }
+    .btn-secondary:hover{ background:#e27113; }
+
+
+    @media (max-width: 900px){
+      .hp-grid{ grid-template-columns: minmax(0, 1fr); }
+    }
+    @media (max-width: 720px){
+      .portfolio-grid{ grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* =========================
+       CONTACT
+       ========================= */
+    .contact{
+      background: var(--grdntgrey);
+      padding: 52px 0 60px;
+    }
+
+   .contact-inner{
+  display:grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+  gap: 40px;
+  align-items:flex-start;
+}
+
+
+    .contact-title{
+      margin:0 0 16px;
+      font-size:1.4rem;
+      color: var(--brick);
+    }
+
+    .contact-text{
+      margin:0;
+      font-size:0.95rem;
+      color:#4a4a4a;
+      max-width: 20rem;
+    }
+
+    .contact-form{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 18px;
+    }
+
+    .contact-form label{
+      display:block;
+      margin-bottom:4px;
+      font-size:0.78rem;
+      text-transform:uppercase;
+      letter-spacing:0.04em;
+      color:#717171;
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+      width:100%;
+      padding: 9px 10px;
+      border-radius:6px;
+      border: 1px solid #c8d5d8;
+      font-size:0.9rem;
+      font-family:inherit;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus{
+      outline: 2px solid var(--lightteal);
+      border-color: var(--lightteal);
+    }
+
+    .contact-form textarea{
+      grid-column: 1 / -1;
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .contact-actions{
+      grid-column: 1 / -1;
+      margin-top:4px;
+    }
+
+    @media (max-width: 900px){
+      .contact-inner{ grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+    footer{
+      background: var(--teal);
+      color:#fff;
+      padding: 30px 0 26px;
+    }
+
+    .footer-inner{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      font-size:0.85rem;
+    }
+
+    .footer-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .footer-logo{
+      width:250px;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      align-items:center;
+    }
+
+    .footer-links a{ color:#d9ecf0; }
+    .footer-links a:hover{ color: var(--orange); }
+
+    /* =========================
+       TOAST NOTIFICATION
+       ========================= */
+    .toast{
+      position: fixed;
+      bottom: 120px;
+      left: 50%;
+      transform: translateX(-50%) translateY(150px);
+      background: var(--teal);
+      color: white;
+      padding: 18px 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 1000;
+      max-width: 90vw;
+    }
+
+    .toast.show{
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon{
+      width: 24px;
+      height: 24px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+      color: white;
+    }
+
+    .toast-message{
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .toast-close{
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 8px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      line-height: 1;
+    }
+
+    .toast-close:hover{
+      opacity: 1;
+    }
+
+    .toast-overlay{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .toast-overlay.show{
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+
 <body>
-<h1>PatternLogic</h1>
-<p>Site coming soon.</p>
+  <div class="top-strip"></div>
+
+  <header>
+    <div class="header-wrap">
+      <div class="brand">
+        <img src="_assets/img/Logo.svg" alt="PatternLogic logo" class="brand-logo" />
+      </div>
+
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="about">
+    <div class="container hero-inner">
+      <div>
+        <h1 class="hero-title">Clarity from Complexity</h1>
+        <p class="hero-subtitle">
+          Structured thinking, clean systems, and intuitive design for teams
+          that are tired of messy information and scattered workflows.
+        </p>
+        <button class="btn-primary" type="button" onclick="location.href='#contact'">
+  Describe your challenge
+</button>
+
+      </div>
+
+      <div class="hero-geo" aria-hidden="true">
+        <div class="geo-circle geo-shape"></div>
+        <div class="geo-half geo-shape"></div>
+        <div class="geo-circle geo-shape"></div>
+        <div class="geo-quarter geo-shape"></div>
+        <div class="geo-circle geo-shape"></div>
+        <div class="geo-quarter geo-shape"></div>
+        <div class="geo-circle geo-shape"></div>
+        <div class="geo-quarter geo-shape"></div>
+        <div class="geo-circle geo-shape"></div>
+        <div class="geo-quarter geo-shape"></div>
+        <div class="geo-circle geo-shape"></div>
+        <div class="geo-quarter geo-shape"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why" id="process">
+    <div class="container">
+      <h2 class="section-title">Why PatternLogic Works</h2>
+
+      <div class="why-grid">
+        <article class="why-card">
+          <div class="why-icon pm" aria-hidden="true"></div>
+          <h3 class="why-title">Pattern Mapping</h3>
+          <p class="why-body">
+            Surfaces the real structure underlying scattered content so the problem is clearly defined before any design work begins.
+          </p>
+<div class="why-role">Diagnosis</div>
+
+        </article>
+
+        <article class="why-card">
+         <div class="why-icon sd" aria-hidden="true"></div>
+          <h3 class="why-title">Systems Design</h3>
+          <p class="why-body">
+            Shapes systems and workflows so decisions, constraints, and real-world use are aligned over time.
+          </p>
+<div class="why-role">Intervention</div>
+        </article>
+
+        <article class="why-card">
+         <div class="why-icon ux" aria-hidden="true"></div>
+          <h3 class="why-title">UX Clarity</h3>
+          <p class="why-body">
+            Turns dense information into layouts that people can scan, navigate,
+            and act on without friction.
+          </p>
+<div class="why-role">Outcome</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-portfolio">
+    <div class="container hp-grid">
+      <div>
+        <h2 class="hp-block-title">How I Work</h2>
+
+        <ul class="hp-list">
+          <li><span class="hp-dot"></span><span>Unpack the existing content and workflows </span></li>
+          <li><span class="hp-dot"></span><span>Organize and label to reduce ambiguity </span></li>
+          <li><span class="hp-dot"></span><span>Rebuild with clear flows and structure</span></li>
+        </ul>
+
+        <div class="hp-flow">
+          <div class="hp-step">Pattern scan and assessment</div>
+          <div class="hp-step">Structure and layout design</div>
+          <div class="hp-step">Prototype, refine, and handoff</div>
+        </div>
+      </div>
+
+      <div id="portfolio">
+        <h2 class="hp-block-title">Portfolio Preview</h2>
+<p class="portfolio-note">
+  Case examples are being prepared and will appear here soon.
+</p>
+        <div class="portfolio-grid">
+          <article class="portfolio-card">
+            <div class="portfolio-card-title">Corporate Website</div>
+            <div class="portfolio-card-line"></div>
+            <div class="portfolio-card-line short"></div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-title">Analytics Dashboard</div>
+            <div class="portfolio-card-line"></div>
+            <div class="portfolio-card-line short"></div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-title">Onboarding Playbook</div>
+            <div class="portfolio-card-line"></div>
+            <div class="portfolio-card-line short"></div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="portfolio-card-title">Course Template System</div>
+            <div class="portfolio-card-line"></div>
+            <div class="portfolio-card-line short"></div>
+          </article>
+        </div>
+
+        <button class="btn-secondary" type="button">View Full Portfolio</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container contact-inner">
+      <div>
+        <h2 class="contact-title">Let's Make Complexity Clear</h2>
+        <p class="contact-text">
+         Share a brief snapshot of your current challenge. You’ll get a short, practical view of how we could simplify it.
+        </p>
+      </div>
+
+      <form class="contact-form" action="https://formspree.io/f/mzzozogp" method="POST">
+        <input type="hidden" name="_next" value="#contact">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required />
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+
+        <div>
+          <label for="role">Role</label>
+          <input id="role" name="role" type="text" />
+        </div>
+
+        <div>
+          <label for="org">Organization</label>
+          <input id="org" name="organization" type="text" />
+        </div>
+
+        <div>
+          <label for="challenge">Project or challenge</label>
+          <textarea id="challenge" name="challenge" required></textarea>
+        </div>
+
+        <div class="contact-actions">
+          <button class="btn-secondary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="_assets/img/Logo.svg" alt="PatternLogic logo" class="footer-logo" />
+      </div>
+
+      <div class="footer-links">
+        <span>© <span id="year"></span> PatternLogic</span>
+        <a href="#about">About</a>
+        <a href="#process">Process</a>
+        <a href="#portfolio">Portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    
+    // Handle form submission with toast notification
+    const form = document.querySelector('.contact-form');
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      
+      // Show loading state
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        
+        if (response.ok) {
+          // Show success toast
+          showToast('Thanks! Your message has been sent successfully.', 'success');
+          form.reset();
+        } else {
+          showToast('Oops! There was a problem sending your message.', 'error');
+        }
+      } catch (error) {
+        showToast('Oops! There was a problem sending your message.', 'error');
+      } finally {
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+    
+    function showToast(message, type) {
+      // Remove any existing toast
+      const existingToast = document.querySelector('.toast');
+      if (existingToast) {
+        existingToast.remove();
+      }
+      
+      // Create toast element
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `
+        <div class="toast-icon">${type === 'success' ? '✓' : '!'}</div>
+        <div class="toast-message">${message}</div>
+        <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+      `;
+      
+      document.body.appendChild(toast);
+      
+      // Trigger animation
+      setTimeout(() => toast.classList.add('show'), 10);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
