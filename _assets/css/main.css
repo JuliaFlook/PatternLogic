@@ -279,9 +279,9 @@ a:hover{
   background-size: 18px 18px; /* keeps it visually similar inside the 32px circle */
 }
 
-.process-icon.pm{ background-image: url("_assets/img/ic_patternmapping.png"); }
-.process-icon.sd{ background-image: url("_assets/img/ic_systemdesign.png"); }
-.process-icon.ux{ background-image: url("_assets/img/ic_uxclarity.png"); }
+.process-icon.pm{ background-image: url("../img/ic_patternmapping.png"); }
+.process-icon.sd{ background-image: url("../img/ic_systemdesign.png"); }
+.process-icon.ux{ background-image: url("../img/ic_uxclarity.png"); }
 
 
     .process-title{ margin:0; font-weight:600; font-size:1.05rem; color: var(--teal); }
