@@ -1,0 +1,240 @@
+/* SmartSheets only */
+
+.sheets-page{
+  padding-top: 26px;
+  padding-bottom: 56px;
+}
+
+.sheets-hero{
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.sheets-subhead{
+  margin: 8px auto 0;
+  max-width: 62ch;
+  opacity: .85;
+}
+
+.smartsheets-note{
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--grey);
+  opacity: 0.8;
+  margin-top: -6px;
+}
+
+
+/* SHEETS 4-per-row, centered*/
+.sheets-grid{
+  --tile: 150px;
+  --gap: 54px;
+
+  display: grid;
+  grid-template-columns: repeat(4, var(--tile));
+  gap: var(--gap);
+
+  width: fit-content;
+  margin: 18px auto 18px auto;
+}
+
+/* Responsive grid */
+@media (max-width: 1024px){
+  .sheets-grid{
+    grid-template-columns: repeat(3, var(--tile));
+  }
+}
+
+@media (max-width: 768px){
+  .sheets-grid{
+    --tile: 140px;
+    --gap: 24px;
+    grid-template-columns: repeat(2, var(--tile));
+  }
+}
+
+@media (max-width: 420px){
+  .sheets-grid{
+    --tile: min(44vw, 160px);
+    --gap: 18px;
+    grid-template-columns: repeat(2, var(--tile));
+  }
+
+  .sheet-title{
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+}
+
+/* Tile */
+.sheet{
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+
+  position: relative;
+  z-index: 1;
+
+  overflow: visible; /* allow scaled hover to extend */
+}
+
+.sheet:focus-visible{
+  outline: 3px solid rgba(26,100,107,.35);
+  outline-offset: 6px;
+  border-radius: 18px;
+}
+
+/* Paper stays normal size */
+.sheet-paper{
+  display: block;
+  width: 100%;
+  aspect-ratio: 8.5 / 11;
+  border-radius: 2px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(44,44,44,.14);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.10),
+    0 12px 32px rgba(0,0,0,.07);
+
+  position: relative;
+  z-index: 1;
+}
+
+/* Thumbnail image */
+.sheet-thumb{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8.5 / 11;
+  object-fit: contain;
+  border-radius: 0px;
+  padding: 0px;
+  background: white;
+
+  /* KEY: hover image should be above the title */
+  z-index: 3;
+
+  /* prevent black outline flash */
+  outline: none;
+}
+
+/* Title */
+.sheet-title{
+  display: block;
+  margin-top: 12px;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  opacity: .92;
+  min-height: 2.4em;
+
+  position: relative;
+  z-index: 2; /* below thumb */
+}
+
+/* Desktop hover only: real hover + fine pointer */
+@media (hover:hover) and (pointer:fine){
+  .sheet-thumb{
+    transition: transform .16s ease, filter .16s ease;
+    transform-origin: center;
+  }
+
+  .sheet:hover{
+    z-index: 50;
+  }
+
+  .sheet:hover .sheet-thumb{
+    transform: scale(3);              /* 150 -> ~450 visual */
+    outline: 0px solid #fff;          /*  If i want white border */
+    outline-offset: 0;             /* to keep it tight */
+    filter: 
+    drop-shadow(0 2px 18px rgba(0,0,0,.14))
+    drop-shadow(0 18px 60px rgba(0,0,0,.22));
+    
+  }
+}
+
+/* Touch devices: NO hover enlargement (prevents sticky fake-hover) */
+@media (hover:none) and (pointer:coarse){
+  .sheet-thumb{
+    transform: none !important;
+    outline: none !important;
+    filter: none !important;
+  }
+}
+
+/* Viewer */
+.sheet-viewer{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.sheet-viewer[hidden]{ display:none; }
+
+.sheet-viewer-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 14, .56);
+}
+
+.sheet-viewer-panel{
+  position: relative;
+  margin: 18px auto;
+  width: min(1100px, calc(100vw - 24px));
+  height: calc(100vh - 36px);
+  border-radius: 18px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(44,44,44,.14);
+  box-shadow: 0 18px 60px rgba(0,0,0,.30);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.sheet-viewer-bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(44,44,44,.12);
+  background: rgba(255,255,255,.88);
+}
+
+.sheet-viewer-title{
+  font-size: 0.98rem;
+  opacity: .92;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sheet-viewer-actions{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sheet-viewer-open,
+.sheet-viewer-close{
+  border: 1px solid rgba(44,44,44,.14);
+  background: rgba(255,255,255,.88);
+  border-radius: 12px;
+  padding: 8px 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sheet-viewer-body{
+  background: rgba(250,250,250,.70);
+}
+
+.sheet-viewer-img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}

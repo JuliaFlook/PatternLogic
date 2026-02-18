@@ -1,3 +1,33 @@
+
+  /* --START OF STAMP-- */
+.pl-stamp{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 2147483647;
+
+  opacity: 0.22;
+  color: #9f3611;           /* brick */
+  mix-blend-mode: multiply;
+
+  overflow: visible;        /* important */
+}
+
+.pl-stamp svg{
+  width: min(86vw, 860px);
+  height: auto;
+  overflow: visible;        /* important */
+  filter: blur(0.2px);
+}
+
+  /* --END OF STAMP-- */
+
+
+html{ overflow-y: scroll; }
 :root{
       --brick:#9f3611;
       --orange:#fa7d17;
@@ -28,6 +58,26 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
+
+    /* =========================
+       GLOBAL PAGE LAYOUT
+       Ensures footer stays at bottom on every page.
+       ========================= */
+    html{ height: 100%; }
+    body{
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main{ flex: 1 0 auto; }
+    footer{ flex-shrink: 0; }
+
+    /* Gradient pages: remove header divider so the gradient reads as one continuous field */
+    body.page-gradient header{
+      border-bottom: none;
+    }
+
 a{
   color: var(--brick);
   text-decoration: underline;
@@ -38,6 +88,13 @@ a:hover{
   color: var(--orange);
 }
 
+.pagetitle{
+  font-weight: 700;
+  color: #555;
+  font-size: clamp(24px, 4vw, 48px);
+  text-align: center;
+  margin: 0.6em 0 .4em;
+}
 
     img{ max-width:100%; height:auto; display:block; }
   
@@ -119,9 +176,31 @@ a:hover{
 
     nav a:hover{
       color: var(--brick);
+      text-decoration: underline;
     }
 
-    nav a{ white-space:nowrap; }
+    nav a{ 
+      white-space:nowrap;
+      text-decoration:none
+     }
+
+.content-block{
+    text-align: left;
+  margin: 0 0 34px;
+  padding: 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.content-block p{
+  max-width: 65ch;
+  margin: 14px auto;
+  text-align: left;
+  line-height: 1.65;
+}
+
+
+
 
     @media (max-width: 640px){
       .header-wrap{
@@ -527,8 +606,13 @@ a:hover{
       align-items:center;
     }
 
-    .footer-links a{ color:#d9ecf0; }
-    .footer-links a:hover{ color: var(--orange); }
+    .footer-links a{ 
+      color:#d9ecf0;
+    text-decoration: none; }
+    .footer-links a:hover{ 
+      color: var(--orange); 
+      text-decoration: underline;
+    }
 
     /* =========================
        TOAST NOTIFICATION
@@ -609,3 +693,21 @@ a:hover{
       opacity: 1;
       visibility: visible;
     }
+
+
+/* Page background utility (use on any page that should have the portfolio gradient) */
+body.page-gradient{
+  background: linear-gradient(to bottom, #f7f7f7 0%, #ffffff 40%);
+}
+
+/* When the page uses the gradient, the header must sit on it (no grey band) */
+body.page-gradient header{
+  background: transparent;
+  border-bottom: none;
+}
+
+/* Ensure main doesn't paint a white slab over the body gradient */
+body.page-gradient main{
+  background: transparent;
+}
+

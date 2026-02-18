@@ -22,8 +22,7 @@ body {
   color: #555;
   font-size: clamp(24px, 4vw, 48px);
   text-align: center;
-  margin-top: 1.8vw;
-  margin-bottom: 4.5vw;
+  margin: 0.6em 0 1.2em;
 }
 
 .unified-grid-container {
@@ -125,7 +124,6 @@ a.popup-link *:focus {
   text-decoration: none !important;
 }
 
-/* MOBILE: container-only rules (no html/body nuking) */
 @media (max-width: 767px) {
   .unified-grid-container {
     width: 100%;
@@ -134,36 +132,12 @@ a.popup-link *:focus {
     padding-inline: clamp(16px, 4vw, 24px);
     box-sizing: border-box;
 
-    /* NEW: make group spacing match card spacing */
+    /* makes group spacing match card spacing */
     gap: 1.25em;
   }
 
-/* tablet range: keep side labels visible instead of clipping */
-@media (min-width: 768px) and (max-width: 1000px) {
-  .left, .right{
-    max-width: 28vw;
-    font-size: clamp(12px, 1.4vw, 16px);
-    line-height: 1.15;
-    padding: 0.15em 0.4em;
-  }
-
-  .left{
-    left: 0;
-    transform: translate(0, -50%);
-    margin-left: 0;
-  }
-
-  .right{
-    right: 0;
-    transform: translate(0, -50%);
-    margin-right: 0;
-  }
-}
-
   .quadrant-row {
     flex-direction: column;
-
-    /* CHANGED: was 1.5em */
     gap: 1.25em;
   }
 
@@ -173,14 +147,11 @@ a.popup-link *:focus {
   }
 
   .quadrant {
-    /* CHANGED: remove extra vertical padding that doubled gaps */
     padding: 0;
   }
 
   .block-grid {
     grid-template-columns: 1fr;
-
-    /* keep this as the standard spacing between cards */
     gap: 1.25em;
   }
 
@@ -204,6 +175,31 @@ a.popup-link *:focus {
     display: none !important;
   }
 }
+
+@media (min-width: 768px) and (max-width: 1000px) {
+  .cross-label.left,
+  .cross-label.right{
+    max-width: 28vw;
+    font-size: clamp(12px, 1.4vw, 16px);
+    line-height: 1.15;
+    padding: 0.15em 0.4em;
+  }
+
+  .cross-label.left{
+    left: 0;
+    transform: translate(0, -50%);
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .cross-label.right{
+    right: 0;
+    transform: translate(0, -50%);
+    margin-right: 0;
+    text-align: right;
+  }
+}
+
 
 @media (max-width: 1200px) {
   .cross-overlay:not([style*='display: none']) .horizontal {
