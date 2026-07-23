@@ -8,6 +8,81 @@ body.page-portfolio .pagetitle{
   margin: 0.6em 0 1.2em;
 }
 
+
+
+.featured{
+  display:grid;
+  grid-template-columns:190px 1fr;
+  gap:32px;
+  align-items:center;
+  padding:30px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.08);
+  border-radius:18px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.07);
+  color:inherit;
+  text-decoration:none;
+}
+
+.featured:hover{
+  color:inherit;
+  text-decoration:none;
+  box-shadow:0 11px 26px rgba(0,0,0,0.10);
+}
+
+.sheet{
+  padding:0px;
+  aspect-ratio:210 / 265;
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.12);
+  box-shadow:0 4px 8px rgba(0,0,0,0.22);
+  transform:rotate(-5deg);
+}
+
+.sheet img{
+  display:block;
+  width:100%;
+}
+
+.featured .more,
+.featured:hover .more{
+  color:#9f3611 !important;
+  text-decoration:underline;
+}
+
+.label{
+  display:block;
+  margin-bottom:5px;
+  color:var(--orange);
+  font-size:0.75rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+.featured h2{
+  margin:0 0 10px;
+}
+
+.featured p{
+  margin:0 0 14px;
+}
+
+.more{
+  color:var(--teal);
+}
+
+@media (max-width:700px){
+  .featured{
+    grid-template-columns:1fr;
+  }
+
+  .sheet{
+    width:180px;
+    margin:0 auto;
+  }
+}
+
+
 :root{
       /* gradient bar */
       --pl-brick: var(--brick);
