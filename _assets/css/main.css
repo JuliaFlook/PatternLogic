@@ -441,14 +441,21 @@ a:hover{
     .hp-list{ list-style:none; padding:0; margin:0 0 26px; }
     .hp-list li{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       gap:8px;
       margin-bottom:8px;
       font-size:0.96rem;
       padding-left: 24px;
     }
 
-    .hp-dot{ width:6px; height:6px; border-radius:50%; background: var(--brightteal); }
+   .hp-dot{
+  width:6px;
+  height:6px;
+  margin-top:0.55em;
+  flex:0 0 6px;
+  border-radius:50%;
+  background:var(--brightteal);
+}
     .hp-dot.orange{ background: var(--orange); }
 
     .hp-flow{ display:flex; flex-direction:column; gap: 15px; max-width: 220px; }
