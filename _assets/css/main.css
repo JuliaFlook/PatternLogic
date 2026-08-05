@@ -73,11 +73,6 @@ html{ overflow-y: scroll; }
     main{ flex: 1 0 auto; }
     footer{ flex-shrink: 0; }
 
-    /* Gradient pages: remove header divider so the gradient reads as one continuous field */
-    body.page-gradient header{
-      border-bottom: none;
-    }
-
 a{
   color: var(--brick);
   text-decoration: underline;
@@ -366,8 +361,11 @@ a:hover{
       width:32px;
       height:32px;
       border-radius:50%;
-      border: 2px solid var(--teal);
+      border:2px solid var(--teal);
       position:relative;
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:18px 18px;
     }
 
     .process-icon::after{
@@ -380,12 +378,6 @@ a:hover{
       right:-4px;
       bottom:-4px;
     }
-.process-icon{
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 18px 18px; /* keeps it visually similar inside the 32px circle */
-}
-
 .process-icon.pm{ background-image: url("../img/ic_patternmapping.png"); }
 .process-icon.sd{ background-image: url("../img/ic_systemdesign.png"); }
 .process-icon.ux{ background-image: url("../img/ic_uxclarity.png"); }
@@ -729,6 +721,74 @@ a:hover{
       opacity: 1;
       visibility: visible;
     }
+
+/* =========================
+   FRICTION AUDIT PAGE
+   ========================= */
+
+.why-layout{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(270px, 320px);
+  gap:clamp(28px, 4vw, 44px);
+  align-items:start;
+}
+
+.why-layout > .prose{
+  max-width:none;
+  min-width:0;
+}
+
+.audit-output{
+  padding:22px 24px;
+  background:#fff;
+  border:1px solid rgba(26, 100, 107, 0.18);
+  border-left:4px solid var(--brightteal);
+  border-radius:10px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.06);
+}
+
+.audit-output h3{
+  margin:0 0 10px;
+  color:var(--brick);
+  font-size:1.2rem;
+  line-height:1.3;
+}
+
+.audit-output p{
+  margin:0 0 14px;
+  line-height:1.55;
+}
+
+.audit-output .hp-list{
+  margin-bottom:0;
+}
+
+.audit-output .hp-list li{
+  padding-left:0;
+  margin-bottom:12px;
+}
+
+.audit-output .hp-list li:last-child{
+  margin-bottom:0;
+}
+
+@media (max-width:900px){
+  .why-layout{
+    grid-template-columns:1fr;
+    gap:26px;
+  }
+
+  .audit-output{
+    max-width:620px;
+  }
+}
+
+@media (max-width:600px){
+  .audit-output{
+    max-width:none;
+    padding:20px;
+  }
+}
 
 
 /* Page background utility (use on any page that should have the portfolio gradient) */
